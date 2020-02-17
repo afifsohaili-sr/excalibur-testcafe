@@ -8,5 +8,8 @@
   "keywords": [],
   "author": "ServiceRocket",
   "license": "COMMERCIAL",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
 }
