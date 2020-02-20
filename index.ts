@@ -1,7 +1,7 @@
-const installPlugin = (obrPath: string): void => {
-  console.log('\n', 'obrPath', obrPath);
-}
+import {Excalibur} from "./src/excalibur";
+import {PluginManager} from "./src/pluginManager";
 
 export {
-  installPlugin
+  Excalibur,
+  PluginManager
 }
