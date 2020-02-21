@@ -65,11 +65,10 @@ var PluginManager = /** @class */ (function () {
         this.excalibur = excalibur;
     }
     PluginManager.prototype.getUpmToken = function () {
-        var _a;
         return __awaiter(this, void 0, void 0, function () {
             var pluginApiUrl, headers, upmToken;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         if (this.upmToken) {
                             return [2 /*return*/, this.upmToken];
@@ -77,8 +76,8 @@ var PluginManager = /** @class */ (function () {
                         pluginApiUrl = '/rest/plugins/1.0/';
                         return [4 /*yield*/, this.excalibur.getHttpService().get(pluginApiUrl, { headers: { 'Content-Type': 'application/json' } })];
                     case 1:
-                        headers = (_b.sent()).headers;
-                        upmToken = (_a = headers['upm-token'], (_a !== null && _a !== void 0 ? _a : ''));
+                        headers = (_a.sent()).headers;
+                        upmToken = headers['upm-token'] || '';
                         this.upmToken = upmToken;
                         return [2 /*return*/, upmToken];
                 }
@@ -110,24 +109,24 @@ var PluginManager = /** @class */ (function () {
                         pluginStatusCheckUrl_1 = installResponse.links.self;
                         pluginStatusCheckInterval_1 = setInterval(function () { return __awaiter(_this, void 0, void 0, function () {
                             var pluginStatusCheckResponse, isEnabled;
-                            var _a, _b;
-                            return __generator(this, function (_c) {
-                                switch (_c.label) {
+                            var _a;
+                            return __generator(this, function (_b) {
+                                switch (_b.label) {
                                     case 0:
                                         timeElapsed_1 = timeElapsed_1 + 1;
                                         console.info("Installing plugin... (Time elapsed: " + timeElapsed_1 + " seconds)");
                                         return [4 /*yield*/, this.excalibur.getHttpService().get(pluginStatusCheckUrl_1)];
                                     case 1:
-                                        pluginStatusCheckResponse = _c.sent();
-                                        isEnabled = (_b = (_a = pluginStatusCheckResponse.data) === null || _a === void 0 ? void 0 : _a.enabled, (_b !== null && _b !== void 0 ? _b : false));
+                                        pluginStatusCheckResponse = _b.sent();
+                                        isEnabled = ((_a = pluginStatusCheckResponse.data) === null || _a === void 0 ? void 0 : _a.enabled) || false;
                                         if (isEnabled) {
                                             clearInterval(pluginStatusCheckInterval_1);
                                             console.info("Plugin " + pluginStatusCheckResponse.data.key + " successfully installed!");
                                             resolve();
                                         }
-                                        if (timeElapsed_1 > 20) {
+                                        if (timeElapsed_1 > 30) {
                                             clearInterval(pluginStatusCheckInterval_1);
-                                            reject(new Error('Timeout! Takes more than 20 seconds to install'));
+                                            reject(new Error('Timeout! Takes more than 30 seconds to install'));
                                         }
                                         return [2 /*return*/];
                                 }

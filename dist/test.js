@@ -38,13 +38,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var index_1 = require("./index");
 (function () { return __awaiter(void 0, void 0, void 0, function () {
-    var excaliburConfig, pluginManager;
+    var excalibur;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                excaliburConfig = new index_1.Excalibur({ confluenceUrl: 'localhost:8093' });
-                pluginManager = new index_1.PluginManager(excaliburConfig);
-                return [4 /*yield*/, pluginManager.install('../reporting/target/reporting-confluence-plugin-6.15.10-SNAPSHOT.obr')];
+                excalibur = new index_1.Excalibur({ confluenceUrl: 'localhost:8093' });
+                return [4 /*yield*/, excalibur.waitForConfluenceBoot()];
             case 1:
                 _a.sent();
                 return [2 /*return*/];

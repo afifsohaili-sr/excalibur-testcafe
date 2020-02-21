@@ -17,7 +17,7 @@ class PluginManager {
     }
     const pluginApiUrl = '/rest/plugins/1.0/';
     const {headers} = await this.excalibur.getHttpService().get(pluginApiUrl, {headers: {'Content-Type': 'application/json'}});
-    const upmToken = headers['upm-token'] ?? '';
+    const upmToken = headers['upm-token'] || '';
     this.upmToken = upmToken
     return upmToken;
   }
@@ -46,15 +46,15 @@ class PluginManager {
           timeElapsed = timeElapsed + 1;
           console.info(`Installing plugin... (Time elapsed: ${timeElapsed} seconds)`)
           const pluginStatusCheckResponse = await this.excalibur.getHttpService().get(pluginStatusCheckUrl);
-          const isEnabled = pluginStatusCheckResponse.data?.enabled ?? false;
+          const isEnabled = pluginStatusCheckResponse.data?.enabled || false;
           if (isEnabled) {
             clearInterval(pluginStatusCheckInterval)
             console.info(`Plugin ${pluginStatusCheckResponse.data.key} successfully installed!`);
             resolve();
           }
-          if (timeElapsed > 20) {
+          if (timeElapsed > 30) {
             clearInterval(pluginStatusCheckInterval)
-            reject(new Error('Timeout! Takes more than 20 seconds to install'));
+            reject(new Error('Timeout! Takes more than 30 seconds to install'));
           }
         }, 1000);
       } catch (err) {

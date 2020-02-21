@@ -1,10 +1,11 @@
 {
   "name": "@servicerocket/excalibur-js",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "Excalibur API's trasferred to JS",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && api-extractor run --local --verbose"
+    "build": "tsc && api-extractor run --local --verbose",
+    "test": "ts-node test.ts"
   },
   "typings": "./dist/index.d.ts",
   "keywords": [],

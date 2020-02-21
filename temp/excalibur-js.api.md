@@ -20,6 +20,8 @@ export class Excalibur {
     password: string;
     // (undocumented)
     username: string;
+    // (undocumented)
+    waitForConfluenceBoot(timeout?: number): Promise<void>;
 }
 
 // @public (undocumented)

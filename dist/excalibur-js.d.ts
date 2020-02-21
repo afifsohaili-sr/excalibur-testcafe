@@ -10,6 +10,7 @@ export declare class Excalibur {
     private httpService;
     constructor({ confluenceUrl, confluenceUrlPrefix, password, username, }: ExcaliburConfig);
     getHttpService(): AxiosInstance;
+    waitForConfluenceBoot(timeout?: number): Promise<void>;
 }
 
 declare type ExcaliburConfig = {

@@ -41,6 +41,28 @@ class Excalibur {
     this.httpService = httpService;
     return httpService;
   }
+
+  public async waitForConfluenceBoot(timeout = 180): Promise<void> {
+    let secondsElapsed = 0;
+    return new Promise((resolve, reject) => {
+      const interval = setInterval(async () => {
+        try {
+          await this.getHttpService().get('/', {timeout: 1000})
+          clearInterval(interval)
+          resolve()
+        } catch (err) {
+          console.log('Waiting for Confluence to start...');
+          secondsElapsed = secondsElapsed + 1;
+          if (secondsElapsed > timeout / 5) {
+            clearInterval(interval)
+            console.log(`Confluence did not start after ${timeout} seconds...`);
+            reject();
+          }
+          console.error(err.message)
+        }
+      }, 5000)
+    })
+  }
 }
 
 export {Excalibur};
