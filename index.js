@@ -1,5 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 var excalibur_1 = require("./src/excalibur");
 exports.Excalibur = excalibur_1.Excalibur;
 var pluginManager_1 = require("./src/pluginManager");

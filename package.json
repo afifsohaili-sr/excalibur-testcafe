@@ -1,6 +1,6 @@
 {
   "name": "@servicerocket/excalibur-js",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Excalibur API's trasferred to JS",
   "main": "dist/index.js",
   "scripts": {
